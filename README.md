@@ -6,7 +6,7 @@ Test it now (need npm and elixir):
 
 ```elixir
 git clone https://github.com/ingerslevio/reaxt-phoenix-example.git
-cd reaxt-example
+cd reaxt-phoenix-example
 mix deps.get
 mix phoenix.server
 ```
