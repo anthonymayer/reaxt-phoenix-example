@@ -32,5 +32,5 @@ defmodule ReaxtPhoenixExample.Endpoint do
     key: "_reaxt_phoenix_example_key",
     signing_salt: "LbRevctu"
 
-  plug :router, ReaxtPhoenixExample.Router
+  plug ReaxtPhoenixExample.Router
 end
