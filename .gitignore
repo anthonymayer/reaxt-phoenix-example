@@ -18,3 +18,5 @@ erl_crash.dump
 /priv/server.js
 /priv/webpack.stats.json
 /priv/static
+
+/web/node_modules

@@ -17,7 +17,7 @@ module.exports = React.createClass({displayName: 'app',
         <ul>{ this.props.items.map(function(m, index){
           var style = ''
           if(self.state.focused == index) style = 'focused'
-          return <li className={style} onClick={self.clicked.bind(self, index)}>{m}</li>
+          return <li key={index} className={style} onClick={self.clicked.bind(self, index)}>{m}</li>
         }) }
         </ul>
         <p>Selected: {this.props.items[this.state.focused]}</p>

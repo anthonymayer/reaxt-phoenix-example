@@ -37,7 +37,6 @@ defmodule ReaxtPhoenixExample.PageController do
       <li><a href="/with_stacktrace">JS error with stacktrace</a></li>
       <li><a href="/without_stacktrace">JS error without stacktrace</a></li>
     </ul>
-    <script src="http://fb.me/react-0.12.2.js"></script>
     <script src="/public/<%= WebPack.file_of(:main) %>"></script>
     <script><%= render.js_render %>("content")</script>
   </body>
@@ -46,19 +45,20 @@ defmodule ReaxtPhoenixExample.PageController do
 
   defp send_rendered_resp(conn,component) do
     render = Reaxt.render!(component,%{items: ["Home","Contact","Pages"]})
-    send_resp(conn, 200,EEx.eval_string(@layout,render: render))
+    conn = put_resp_content_type(conn, "text/html")
+    send_resp(conn, 200, EEx.eval_string(@layout, render: render))
   end
 
   def index(conn,_params), do:
-    send_rendered_resp(conn,:app)
+    send_rendered_resp(conn, :app)
   def with_stacktrace(conn,_params), do:
-    send_rendered_resp(conn,{:multi_components,:with_stacktrace})
-  def without_stacktrace(conn,_params), do:
-    send_rendered_resp(conn,{:multi_components,:no_stacktrace})
-  def subcomponent(conn,_params), do:
-    send_rendered_resp(conn,{:multi_components,:with_css})
+    send_rendered_resp(conn, {:multi_components, :with_stacktrace})
+  def without_stacktrace(conn, _params), do:
+    send_rendered_resp(conn, {:multi_components, :no_stacktrace})
+  def subcomponent(conn, _params), do:
+    send_rendered_resp(conn,{:multi_components, :with_css})
 
-  def myrouter(conn,_params) do
+  def myrouter(conn, _params) do
     ## this part use react_router as an example of dynamic handler selection
     render = Reaxt.render!(:my_router, conn.request_path)
     send_resp(conn, 200, EEx.eval_string(@layout, render: render))
